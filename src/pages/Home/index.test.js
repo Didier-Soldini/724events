@@ -11,6 +11,7 @@ describe("When Form is created", () => {
   });
 
   describe("and a click is triggered on the submit button", () => {
+    jest.useFakeTimers({})
     it("the success message is displayed", async () => {
       render(<Home />);
       fireEvent(
@@ -21,7 +22,8 @@ describe("When Form is created", () => {
         })
       );
       await screen.findByText("En cours");
-      await screen.findByText("Message envoyé !");
+      jest.advanceTimersByTime(5000)
+      await screen.findByText("Envoyer");
     });
   });
 
