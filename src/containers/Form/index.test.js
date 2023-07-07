@@ -29,3 +29,18 @@ describe("When Events is created", () => {
     });
   });
 });
+
+describe("and a click is triggered on the submit button that fails", () => {
+  it("the success action is not called", async () => {
+    const onSuccess = jest.fn();
+    render(<Form onSuccess={onSuccess} />);
+    fireEvent(
+      await screen.findByTestId("button-test-id"),
+      new MouseEvent("click", {
+        cancelable: false,
+        bubbles: false,
+      })
+    );
+    expect(onSuccess).not.toHaveBeenCalled();
+  });
+});

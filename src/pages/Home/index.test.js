@@ -31,16 +31,31 @@ describe("When Form is created", () => {
 
 
 describe("When a page is created", () => {
-  it("a list of events is displayed", () => {
-    // to implement
-  })
-  it("a list a people is displayed", () => {
-    // to implement
-  })
-  it("a footer is displayed", () => {
-    // to implement
-  })
-  it("an event card, with the last event, is displayed", () => {
-    // to implement
-  })
+  it("a list of events is displayed", async () => {
+    render(<Home />);
+    expect(screen.getByTestId("list-events")).toBeInTheDocument();
+    await(() => {
+      expect(screen.getByText("#DigitonPARIS")).toBeInTheDocument();
+    });
+  });
+
+});
+
+it("a list a people is displayed", () => {
+  render(<Home />);
+  expect(screen.getByText("Samira")).toBeInTheDocument();
+  expect(screen.getByText("Isabelle")).toBeInTheDocument();
+});
+
+it("a footer is displayed", () => {
+  render(<Home />);
+  expect(screen.getByText("45 avenue de la République, 75000 Paris")).toBeInTheDocument();
+});
+
+it("an event card, with the last event, is displayed", async () => {
+  render(<Home />);
+  await(() => {
+    expect(screen.getAllByTestId("last-event")).toBeInTheDocument();
+  });
+
 });
